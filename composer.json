@@ -1,0 +1,17 @@
+{
+    "name": "ykocaman/gamecase",
+    "description": "a social game where users of the game are able to send gifts to each other",
+    "authors": [
+        {
+            "name": "Yusuf Kocaman",
+            "email": "yusuf.kocaman@msn.com"
+        }
+    ]
+    ,
+     "autoload" : {
+        "psr-4" : {
+            "App\\" : "app/"
+        },
+        "files" : ["app/routes.php","app/functions.php"]
+    }
+}
