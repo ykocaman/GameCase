@@ -9,6 +9,16 @@
 require_once  __DIR__ . '/../vendor/autoload.php';
 
 Use App\Kernel\Application;
+use App\Kernel\Response;
 
-$app = new Application();
-$app->run();
+$app = Application::getInstance();
+
+try {
+	$app->run();
+} catch (\Exception $e) {
+	if(config('env') == 'production'){
+		return Response::error(500);
+	}else{
+		echo '<pre>'.$e.'</pre>';
+	}
+}

@@ -2,21 +2,41 @@
 
 namespace App\Controllers;
 
+use App\Kernel\Auth;
 use App\Kernel\Response;
+use App\Kernel\Session;
+
 use App\Models\User;
+use App\Models\Gift;
+use App\Models\GiftSent;
+use App\Models\GiftClaimed;
 
-class HomeController extends Controller
+/**
+ * Class HomeController
+ * @package App\Controllers
+ */
+class HomeController extends AuthedController
 {
+    /**
+     * @return mixed|string
+     */
     public function index(){
-        //$user = new User();
-        //var_dump($user->insert(array('name' => 'test','nickname' => 'testci','password' => 'asdasd')));
-        //var_dump($user->find(1));
+    	$user = new User();
 
-        return Response::view('index');
+    	$data['people']        = $user->all();
+    	$data['user']          = Session::getUser();
+
+    	$gift                  = new Gift();
+    	$data['gifts']         = $gift->all();
+
+    	$gift_sent             = new GiftSent();
+    	$data['gifts_sent']    = $gift_sent->toUser(Session::getUserId());
+
+        $gift_claimed          = new GiftClaimed();
+        $gift_claimed->setAllAsSeen(Session::getUserId());
+        $data['gifts_claimed'] = $gift_claimed->fromUser(Session::getUserId());
+
+        return Response::view('home',$data);
     }
 
-    public function test(){
-
-        return Response::view('index');
-    }
 }

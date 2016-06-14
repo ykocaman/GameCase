@@ -3,6 +3,6 @@
 return [ 
 		'host' 		=> 'localhost',
 		'username'	=> 'root',
-		'password'	=> '123123',
+		'password'	=> '123456',
 		'dbname'	=> 'gamecase'
 	    ];

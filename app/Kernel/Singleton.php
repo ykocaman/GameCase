@@ -3,11 +3,21 @@
 namespace App\Kernel;
 
 
+/**
+ * Class Singleton
+ * @package App\Kernel
+ */
 trait Singleton
 {
 
+    /**
+     * @var object
+     */
     private static $instance;
 
+    /**
+     * @return mixed
+     */
     public static function getInstance()
     {
         if (null === static::$instance) {
@@ -18,15 +28,24 @@ trait Singleton
     }
 
 
+    /**
+     * Singleton constructor.
+     */
     protected function __construct()
     {
     }
 
-    private function __clone()
+    /**
+     * block cloning object
+     */
+    protected function __clone()
     {
     }
 
-    private function __wakeup()
+    /**
+     * block cloning object
+     */
+    protected function __wakeup()
     {
     }
 }
