@@ -22,9 +22,13 @@ function in_request(json,tmp){
 }
 
 function out_request(json,parameter){
-	document.getElementById("accept" + parameter).innerHTML = "";
-	document.getElementById("reject" + parameter).innerHTML = "";
-	document.getElementById("status" + parameter).innerHTML = json.result;
+	if(json.result !== undefined){
+		alert(json.result);
+	}else{
+		document.getElementById("accept" + parameter).innerHTML = "";
+		document.getElementById("reject" + parameter).innerHTML = "";
+		document.getElementById("status" + parameter).innerHTML = json.status;
+	}
 }
 
 function ajax(url,parameters,callback, func_parameters){

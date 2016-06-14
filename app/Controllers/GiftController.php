@@ -98,16 +98,17 @@ class GiftController extends Controller
             if($this->sendGift($gift_claimed['gift_id'],$gift_claimed['claimer_id']) == true){         
                 $gifts_claimed->update($gift_claimed['id'],array('status' => 'accepted'));
 
-                $result = 'accepted';
+                $status = 'accepted';
             }else{
-                $result = 'seen';
+                $status = 'seen';
+                $result = 'Günlük limitiniz doldu';
             }
 
         }else{
-            $result = $gift_claimed['status'];
+            $status = $gift_claimed['status'];
         }
 
-        return Response::json(compact('result'));
+        return Response::json(compact('result','status'));
     }
 
     /**
@@ -119,11 +120,11 @@ class GiftController extends Controller
 
         if($gift_claimed['status'] == 'seen'){
             $gifts_claimed->update($gift_claimed['id'],array('status' => 'rejected'));
-            $result = 'rejected';
+            $status = 'rejected';
         }else{
-            $result = $gift_claimed['status'];
+            $status = $gift_claimed['status'];
         }
 
-       return Response::json(compact('result'));
+       return Response::json(compact('status'));
     }
 }
